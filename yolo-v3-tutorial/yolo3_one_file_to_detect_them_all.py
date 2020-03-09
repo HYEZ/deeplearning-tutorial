@@ -268,7 +268,7 @@ def preprocess_input(image, net_h, net_w):
         new_w = (new_w * net_h)/new_h
         new_h = net_h
 
-    resize the image to the new size
+    # resize the image to the new size
     resized = cv2.resize(image[:,:,::-1]/255., (int(new_w), int(new_h)))
 
     # embed the image into the standard letter box
