@@ -33,8 +33,8 @@ OFFSET 		= 1
 BATCH_SIZE  = 32
 
 
-path 		= './data/trainingSet'
-path_model  = './mnistNet.hdf5'
+path 		= '/mnt/c/Users/Z440_user1/Desktop/dataset/mnistNet/data/trainingSet'
+path_model  = '/mnt/c/Users/Z440_user1/Desktop/dataset/mnistNet/mnistNet.hdf5'
 LABEL 	= np.array(['0','1','2','3','4','5','6','7','8','9'])
 
 
@@ -279,7 +279,7 @@ def inference():
 
 	size = 29
 	if SingleTest:
-		path_test 	= './data/testSample/img_15.jpg'
+		path_test  = '/mnt/c/Users/Z440_user1/Desktop/dataset/mnistNet/data/testSample/img_15.jpg'
 		
 		img 		= cv2.imread(path_test)
 		img 		= np.array(img[:,:,0], dtype = 'float32')
@@ -293,7 +293,7 @@ def inference():
 	else:
 		for i in range(size):
 
-			path_test 	= './data/testSample/img_'+str(i+100)+'.jpg'
+			path_test 	= '/mnt/c/Users/Z440_user1/Desktop/dataset/mnistNet/data/testSample/img_'+str(i+100)+'.jpg'
 			
 			img 		= cv2.imread(path_test)
 			img 		= np.array(img[:,:,0], dtype = 'float32')
@@ -318,5 +318,5 @@ def inference():
 
 
 if __name__ == '__main__':
-	train()
-	#inference()
+	# train()
+	inference()
