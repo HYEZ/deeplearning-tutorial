@@ -232,100 +232,177 @@ def cnn(N_LABELS,  batch_size = None, dtype='float32'):
 
 
 def resnet(N_LABELS,  batch_size = None, dtype='float32'):
-    img_input = layers.Input( 	shape = input_shape, dtype = dtype, batch_size = batch_size)	
-    x = img_input
+	img_input = layers.Input( 	shape = input_shape, dtype = dtype, batch_size = batch_size)	
+	x = img_input
 
-    _x = layers.Conv2D(	128, 3,
-                        strides 	= (1, 1),
-                        padding 	= 'same',
-                        activation 	= 'relu',
-                        use_bias 	= True,
-                        bias_initializer 	= 'zeros',
-                        kernel_initializer 	= 'he_normal')(x) 
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(x) 
 
-    _x = layers.Conv2D(	128, 3,
-                        strides 	= (1, 1),
-                        padding 	= 'same',
-                        activation 	= 'relu',
-                        use_bias 	= True,
-                        bias_initializer 	= 'zeros',
-                        kernel_initializer 	= 'he_normal')(x) 
-    x = x + _x
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(_x) 
 
-    _x = layers.Conv2D(	128, 3,
-                        strides 	= (1, 1),
-                        padding 	= 'same',
-                        activation 	= 'relu',
-                        use_bias 	= True,
-                        bias_initializer 	= 'zeros',
-                        kernel_initializer 	= 'he_normal')(x) 
+	_x = layers.BatchNormalization(	axis 	 = BNaxis,
+									momentum = BATCH_NORM_DECAY,
+									epsilon  = BATCH_NORM_EPSILON)(_x)		
 
-    _x = layers.Conv2D(	128, 3,
-                        strides 	= (1, 1),
-                        padding 	= 'same',
-                        activation 	= 'relu',
-                        use_bias 	= True,
-                        bias_initializer 	= 'zeros',
-                        kernel_initializer 	= 'he_normal')(_x) 
 
-    x = x + _x
 
-    _x = layers.Conv2D(	128, 3,
-                        strides 	= (1, 1),
-                        padding 	= 'same',
-                        activation 	= 'relu',
-                        use_bias 	= True,
-                        bias_initializer 	= 'zeros',
-                        kernel_initializer 	= 'he_normal')(x) 
+	x = x + _x
 
-    _x = layers.Conv2D(	128, 3,
-                        strides 	= (1, 1),
-                        padding 	= 'same',
-                        activation 	= 'relu',
-                        use_bias 	= True,
-                        bias_initializer 	= 'zeros',
-                        kernel_initializer 	= 'he_normal')(_x) 
 
-    x = x + _x
 
-    _x = layers.Conv2D(	128, 3,
-                        strides 	= (1, 1),
-                        padding 	= 'same',
-                        activation 	= 'relu',
-                        use_bias 	= True,
-                        bias_initializer 	= 'zeros',
-                        kernel_initializer 	= 'he_normal')(x) 
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(x) 
 
-    _x = layers.Conv2D(	128, 3,
-                        strides 	= (1, 1),
-                        padding 	= 'same',
-                        activation 	= 'relu',
-                        use_bias 	= True,
-                        bias_initializer 	= 'zeros',
-                        kernel_initializer 	= 'he_normal')(_x) 
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(_x) 
 
-    x = x + _x
+	_x = layers.BatchNormalization(	axis 	 = BNaxis,
+									momentum = BATCH_NORM_DECAY,
+									epsilon  = BATCH_NORM_EPSILON)(_x)
 
-    x = layers.MaxPooling2D((2, 2), strides=(2, 2), padding='same')(x)
 
-    x = layers.Flatten()(x)
 
-    x = layers.Dense( 	fcdepth[0],  
-                        kernel_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY),
-                        bias_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY))(x)
 
-    x = layers.Dense( 	fcdepth[1],  
-                        kernel_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY),
-                        bias_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY))(x)
+	x = x + _x
 
-    x = layers.Dense( 	N_LABELS,  
-                        kernel_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY),
-                        bias_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY))(x)
 
-    x = backend.cast(x, 'float32')
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(x) 
 
-    x = layers.Activation('softmax')(x)
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(_x) 
 
-    model = models.Model(img_input, x, name = 'without_skip')
-    
-    return model
+	_x = layers.BatchNormalization(	axis 	 = BNaxis,
+									momentum = BATCH_NORM_DECAY,
+									epsilon  = BATCH_NORM_EPSILON)(_x)
+
+
+
+	x = x + _x
+
+
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(x) 
+
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(_x) 
+
+	_x = layers.BatchNormalization(	axis 	 = BNaxis,
+									momentum = BATCH_NORM_DECAY,
+									epsilon  = BATCH_NORM_EPSILON)(_x)
+
+	x = x + _x
+
+
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(x) 
+
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(_x) 
+
+	_x = layers.BatchNormalization(	axis 	 = BNaxis,
+									momentum = BATCH_NORM_DECAY,
+									epsilon  = BATCH_NORM_EPSILON)(_x)
+
+	x = x + _x
+
+
+	_x = layers.Conv2D(	64, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(x) 
+
+	_x = layers.Conv2D(	128, 3,
+	                    strides 	= (1, 1),
+	                    padding 	= 'same',
+	                    activation 	= 'relu',
+	                    use_bias 	= True,
+	                    bias_initializer 	= 'zeros',
+	                    kernel_initializer 	= 'he_normal')(_x) 
+
+	_x = layers.BatchNormalization(	axis 	 = BNaxis,
+									momentum = BATCH_NORM_DECAY,
+									epsilon  = BATCH_NORM_EPSILON)(_x)
+
+
+	# _x = layers.MaxPooling2D((2, 2), strides=(2, 2), padding='same')(_x)
+
+	x = x + _x
+
+	x = layers.MaxPooling2D((2, 2), strides=(2, 2), padding='same')(x)
+
+	x = layers.Flatten()(x)
+
+	x = layers.Dense( 	fcdepth[0],  
+	                    kernel_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY),
+	                    bias_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY))(x)
+
+	x = layers.Dense( 	fcdepth[1],  
+	                    kernel_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY),
+	                    bias_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY))(x)
+
+	x = layers.Dense( 	N_LABELS,  
+	                    kernel_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY),
+	                    bias_regularizer 	= regularizers.l2(L2_WEIGHT_DECAY))(x)
+
+	x = backend.cast(x, 'float32')
+
+	x = layers.Activation('softmax')(x)
+
+	model = models.Model(img_input, x, name = 'resnet')
+
+	return model
